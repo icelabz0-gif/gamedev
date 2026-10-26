@@ -115,7 +115,8 @@ File signals sharpen this: `*.yarn`/`*.ink` → `dialogue-systems`/`visual-novel
   Bob builds); Roblox foundation
   `roblox-luau`, persistence `roblox-datastores`, UI `roblox-ui`, remotes/security
   `roblox-networking`, character lifecycle `roblox-characters`, simulation/queries
-  `roblox-physics`, and in-Studio operation `roblox-studio-workflow`.
+  `roblox-physics`, in-Studio operation `roblox-studio-workflow`, and simulator/tycoon/idle
+  economy balancing `roblox-simulator-economy`.
 
 ### 3b. Disciplines — load **with** the engine skill (concept ↔ engine API)
 
@@ -141,7 +142,10 @@ For Roblox, compose cross-engine concepts with the focused engine skill: HUD/men
 `roblox-ui` + `game-ui-ux` (+ `input-systems` for gameplay bindings); remote exploit or
 replication requests use `roblox-networking` + `roblox-luau`; respawn/rig requests use
 `roblox-characters`; physical simulation/query requests use `roblox-physics` (+
-`physics-tuning` for stability); direct place editing also uses `roblox-studio-workflow`.
+`physics-tuning` for stability); simulator, tycoon, clicker or idle economy requests (upgrade
+costs, rebirths, offline earnings, big numbers, paid eggs/crates odds) use
+`roblox-simulator-economy` + `roblox-networking` (+ `roblox-datastores` for saving); direct place
+editing also uses `roblox-studio-workflow`.
 
 For Ebitengine, bind engine-specific slots to `ebitengine-game` and its relevant reference
 (input, rendering, text/UI, audio, gameplay, tilemaps or state/testing). Add only the needed
@@ -234,6 +238,7 @@ and offer to load it if the user confirms.
 | "build a 2D puzzle in Go with Ebitengine" | Ebitengine (named; later `go.mod`) | `ebitengine-game` → `puzzle` |
 | "fix a stale HUD in my Go game" | Ebitengine (`go.mod` + game imports) | `ebitengine-game` → `game-ui-ux`; read text/UI, no new scaffold |
 | "add player movement to my Defold game" | Defold (`game.project`) | `defold-core` → `input-systems` |
+| "rebirths in my Roblox simulator take forever" | Roblox (`*.project.json` / place file) | `roblox-luau` → `roblox-simulator-economy` → `roblox-networking` |
 | "procedural dungeon roguelike in Godot" | Godot | `godot-tilemap` → `procedural-gen` → `roguelike` |
 | "branching dialogue from a `.yarn` file" | (none required) | `dialogue-systems` (+ engine UI skill if an engine is detected) |
 | "how do I design save slots with migration?" | (none) | `save-systems` only |
